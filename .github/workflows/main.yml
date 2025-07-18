@@ -13,7 +13,7 @@ jobs:
       - name: Run Kali Desktop Docker container
         uses: addnab/docker-run-action@v3
         with:
-          image: lukaszlach/kali-desktop:latest # Or your preferred image
+          image: kalilinux/kali-rolling # Or your preferred image
           options: --privileged --network host -e RESOLUTION=1280x720x24 -e USER=kali -e PASSWORD=kali # adjust as needed
           run: |
             echo "Kali Desktop is running. Connect via VNC to http://localhost:6080"
