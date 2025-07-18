@@ -1,0 +1,27 @@
+name: Kali Desktop in GitHub Actions
+
+on:
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  kali_desktop:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run Kali Desktop Docker container
+        uses: addnab/docker-run-action@v3
+        with:
+          image: lukaszlach/kali-desktop:latest # Or your preferred image
+          options: --privileged --network host -e RESOLUTION=1280x720x24 -e USER=kali -e PASSWORD=kali # adjust as needed
+          run: |
+            echo "Kali Desktop is running. Connect via VNC to http://localhost:6080"
+            # Start VNC server (if not already started)
+            vncserver :1 -geometry 1280x720 -depth 24
+
+      - name: Display instructions
+        run: |
+          echo "Connect to the VNC server at http://localhost:6080"
+          echo "Username: kali"
+          echo "Password: kali"
